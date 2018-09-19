@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 840279 */
+  src: url('//at.alicdn.com/t/font_840279_m2s2lccpts.eot');
+  src: url('//at.alicdn.com/t/font_840279_m2s2lccpts.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_840279_m2s2lccpts.woff') format('woff'),
+    url('//at.alicdn.com/t/font_840279_m2s2lccpts.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_840279_m2s2lccpts.svg#iconfont') format('svg');
+}
+
+@font-face {
+  font-family: "vanIcon";
+  src: url(https://img.yzcdn.cn/vant/vant-icon-76f274.ttf) format('truetype');
+}
+
+.van-icon {
+  position: relative;
+  font-family: "iconfont", "vanIcon" !important;
+  font-size: 14px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+i.van-icon-address:before {
+  content: "\e698";
+}
+
+i.van-icon-mobile:before {
+  content: "\e640";
+}
+
+i.van-icon-smoke-sensor:before {
+  content: "\e664";
+}
+
+i.van-icon-smoke-sensor2:before {
+  content: "\e601";
+  color:#01b84c;
+  font-size: 32px;
+}
+
+i.van-icon-smoke-sensor:before {
+  content: "\e664";
+}
+
+i.van-icon-user:before {
+  content: "\eefb";
+}
+
+i.van-icon-imei:before {
+  content: "\e607";
+}
+
+i.van-icon-iccid:before {
+  content: "\e81c";
+}
+
+i.van-icon-device-name:before {
+  content: "\e600";
+}
+
+i.van-icon-back-top:before {
+  content: "\e603";
+}
