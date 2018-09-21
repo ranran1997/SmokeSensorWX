@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'iconfont';
   /* project id 840279 */
-  src: url('//at.alicdn.com/t/font_840279_m2s2lccpts.eot');
-  src: url('//at.alicdn.com/t/font_840279_m2s2lccpts.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_840279_m2s2lccpts.woff') format('woff'),
-    url('//at.alicdn.com/t/font_840279_m2s2lccpts.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_840279_m2s2lccpts.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_840279_joyuqjio6da.eot');
+  src: url('//at.alicdn.com/t/font_840279_joyuqjio6da.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_840279_joyuqjio6da.woff') format('woff'),
+    url('//at.alicdn.com/t/font_840279_joyuqjio6da.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_840279_joyuqjio6da.svg#iconfont') format('svg');
 }
 
 @font-face {
@@ -62,4 +62,12 @@ i.van-icon-device-name:before {
 
 i.van-icon-back-top:before {
   content: "\e603";
+}
+
+i.van-icon-liability:before {
+  content: "\e619";
+}
+
+i.van-icon-camera:before {
+  content: "\e6f9";
 }

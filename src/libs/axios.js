@@ -109,7 +109,6 @@ class httpRequest {
         default:
           message= '服务内部错误'
       }
-      // Message.error(message)
       // 对响应错误做点什么
       return Promise.reject(error)
     })

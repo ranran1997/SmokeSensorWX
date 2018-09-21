@@ -1,13 +1,11 @@
 let baseURL = 'http://192.168.2.143:8040'
-let mediaURL = 'http://localhost:5883/'
+let mediaURL = 'http://192.168.2.143:8040'
 let frontWebURL = 'http://192.168.2.150:8080'
 const cookieExpires=1;
 if (process.env.NODE_ENV === 'production') {
-     // baseURL = 'http://120.79.130.11:8030'
-     // frontWebURL = 'http://120.79.130.11:8031'
-     baseURL =  'http://47.106.169.11:8030';
-     frontWebURL = 'http://47.106.169.11:8031';
-     mediaURL = 'http://47.106.169.11:8030'
+     baseURL = 'http://xf.ctjt.cn:8020';
+     frontWebURL = 'http://xf.ctjt.cn';
+     mediaURL = 'http://xf.ctjt.cn:8020'
 }
 
 export  {

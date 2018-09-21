@@ -30,11 +30,12 @@ export default {
 		async loadMore() {
 			console.log("loadmore");
 			const vm = this;
+	
 			if (vm.pages.pageCount < vm.pages.currPage) {
-				vm.$toast({
-					message: "没有更多了~",
-					position: "top"
-				});
+				// vm.$toast({
+				// 	message: "没有更多了~",
+				// 	position: "top"
+				// });
 				vm.isFinished();
 			}else{
 				const page = await vm.initData(true);
@@ -43,6 +44,7 @@ export default {
 			vm.loading = false;
 		},
 		nextPage(pageCount = 1){
+					
 			this.pages.currPage += 1;
 			this.pages.pageCount = pageCount;
 		},

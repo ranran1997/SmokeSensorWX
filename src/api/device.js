@@ -24,4 +24,12 @@ export const delDevice = (data) => {
   })
 }
 
+export const uploadPic = (data) => {
+  return axios.request({
+    url: '/api/dev/pic',
+    data: data,
+    method: 'post'
+  })
+}
+
 

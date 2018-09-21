@@ -1,54 +1,20 @@
 <template>
-	<div class="bind">
-		<van-cell-group>
-			<van-field
-			type="tel"
-				v-model="bindForm.mobile"
-				required
-				clearable
-				label="手机号"
-				placeholder="请输入手机号"
-				 :error-message="errorMsg.mobile"
-				/>
-			<van-field
-				v-model="bindForm.validate_code"
-				center
-				required
-				clearable
-				label="验证码"
-				placeholder="请输入短信验证码"
-				:error-message="errorMsg.validate_code"
-				>
+  <div class="bind">
+    <van-cell-group>
+      <van-field type="tel" v-model="bindForm.mobile" required clearable label="手机号" placeholder="请输入手机号" :error-message="errorMsg.mobile" />
+      <van-field v-model="bindForm.validate_code" center required clearable label="验证码" placeholder="请输入短信验证码" :error-message="errorMsg.validate_code">
 
-			    <van-button slot="button" 
-                      size="small" 
-                      type="primary" 
-                      @click="getValidateCode"
-                      :disabled="sendMsgDisabled">{{smsBtnText}}</van-button>
-			</van-field>
-			<van-field
-				v-model="bindForm.username"
-				required
-				clearable
-				label="姓名"
-				placeholder="请输入姓名"
-				:error-message="errorMsg.username"
-			/>
-			<van-field
-				v-model="bindForm.addr"
-				label="地址"
-				type="textarea"
-				placeholder="请输入详细地址"
-				rows="2"
-				autosize
-			/>
-		</van-cell-group>
-		<div class="bind-button">
-				<van-button size="large" type="danger" 
-        :loading="isBinding" @click="bindWx" >绑定</van-button>
-		</div>	
-	
-	</div>
+        <van-button slot="button" size="small" type="primary" @click="getValidateCode" :disabled="sendMsgDisabled">{{smsBtnText}}</van-button>
+      </van-field>
+      <van-field v-model="bindForm.username" required clearable label="姓名" placeholder="请输入姓名" :error-message="errorMsg.username" />
+      <van-field v-model="bindForm.shopname" required clearable label="商户名称" placeholder="请输入商户名称" :error-message="errorMsg.shopname" />
+      <van-field v-model="bindForm.addr" required clearable label="地址" type="textarea" placeholder="请输入详细地址" rows="2" autosize :error-message="errorMsg.addr" />
+    </van-cell-group>
+    <div class="bind-button">
+      <van-button size="large" type="danger" :loading="isBinding" @click="bindWx" class="btn-bind">绑定</van-button>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -66,16 +32,19 @@ export default {
         validate_code: "",
         username: "",
         addr: "",
+        shopname: "",
         purpose: 1,
         openid: "",
         headimage: "",
-        cookie_value: ""
+        cookie_value: "",
+        dutypath:""
       },
       errorMsg: {
         mobile: "",
         validate_code: "",
         username: "",
-        addr: ""
+        addr: "",
+        shopname: ""
       },
       rules: {
         username: [{ required: true, message: "请输入名称" }],
@@ -92,7 +61,9 @@ export default {
             }
           }
         ],
-        validate_code: [{ required: true, message: "请输入验证码" }]
+        validate_code: [{ required: true, message: "请输入验证码" }],
+        addr: [{ required: true, message: "请输入安装地址" }],
+        shopname: [{ required: true, message: "请输入商户名称" }]
       },
       isBinding: false,
       time: 120, // 发送验证码倒计时
@@ -129,7 +100,6 @@ export default {
         this.setUserInfo(res.result);
         this.$router.replace("/user");
       }
-
     },
     async getValidateCode() {
       if (!this.sendMsgDisabled) {
@@ -164,6 +134,8 @@ export default {
             this.bindForm.cookie_value = res.result.cookie_value;
             this.setUserInfo(this.bindForm);
             this.$router.replace("/user");
+          } else {
+            this.$toast(res.msg);
           }
         }
         this.isBinding = false;

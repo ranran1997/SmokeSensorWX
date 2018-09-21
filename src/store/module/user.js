@@ -11,6 +11,8 @@ export default {
     headimage: '',
     cookie_value: '',
     addr: '',
+    shopname: '',
+    dutypath: ''
   },
   mutations: {
     updateUserState(state) {
@@ -19,6 +21,9 @@ export default {
       state.userId = sessionStorage.getItem('userId')
       state.isVip = sessionStorage.getItem('isVip')
     },
+    setDutyPath(state, dutypath) {
+      state.dutypath = dutypath;
+    },
     setWxUserInfo(state, user_info) {
       state.username = user_info.username;
       state.openid = user_info.openid;
@@ -26,6 +31,8 @@ export default {
       state.headimage = user_info.headimage;
       state.cookie_value = user_info.cookie_value;
       state.addr = user_info.addr;
+      state.shopname = user_info.shopname;
+      state.dutypath = user_info.dutypath;
       setToken(user_info.cookie_value)
     },
   }

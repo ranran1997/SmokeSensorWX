@@ -17,3 +17,12 @@ export const GetSMSValidate = (data) => {
     hideLoading: true
   })
 }
+
+export const uploadDutyLetter = (data) => {
+  return axios.request({
+    url: '/api/user/dutyletter',
+    data: data,
+    method: 'post',
+    hideLoading: true
+  })
+}
