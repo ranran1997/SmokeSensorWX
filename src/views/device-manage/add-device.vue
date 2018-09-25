@@ -13,12 +13,10 @@
 			<van-field
 				v-model="deviceForm.iccid"
 				center
-				required
 				clearable
         left-icon="iccid"
 				label="ICCID"
 				placeholder="请输入ICCID号"
-				:error-message="errorMsg.iccid"
 				/>
 			<van-field
 				v-model="deviceForm.friendname"
@@ -52,7 +50,7 @@ export default {
       },
       rules: {
         imei: [{ required: true, message: "请输入imei号" }],
-        iccid: [{ required: true, message: "请输入iccid" }]
+        // iccid: [{ required: true, message: "请输入iccid" }]
       },
       isLoading:false
     };

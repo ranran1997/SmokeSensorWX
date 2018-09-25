@@ -55,9 +55,9 @@ export default {
       username: state => state.user.username,
       mobile: state => state.user.mobile
     }),
-    delWidth(){
-      return window.innerWidth*0.2
-    },
+    delWidth() {
+      return window.innerWidth * 0.2;
+    }
   },
   watch: {},
 
@@ -81,16 +81,30 @@ export default {
         scanType: ["qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
         success: function(res) {
           try {
+            const reg = /^\d{15}$/;
             let result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-            let IMEI = result.split("&")[0].split("=")[1];
-            let ICCID = result.split("&")[1].split("=")[1];
-            vm.$router.push({
-              path: "/add-device",
-              query: {
-                IMEI: IMEI,
-                ICCID: ICCID
-              }
-            });
+            if (reg.test(result)) {
+              let IMEI = result;
+              vm.$router.push({
+                path: "/add-device",
+                query: {
+                  IMEI: IMEI,
+                  ICCID: ""
+                }
+              });
+            }else{
+               vm.$toast("请扫描烟感设备二维码");
+            }
+            // alert(result);
+            // let IMEI = result.split("&")[0].split("=")[1];
+            // let ICCID = result.split("&")[1].split("=")[1];
+            // vm.$router.push({
+            //   path: "/add-device",
+            //   query: {
+            //     IMEI: IMEI,
+            //     ICCID: ICCID
+            //   }
+            // });
           } catch (error) {
             vm.$toast("请扫描烟感设备二维码");
           }
@@ -176,7 +190,6 @@ export default {
         row: this.pages.perPage
       };
       return getDevicePagedList(params).then(res => {
-        console.log(res);
         const items = res.result.data;
         const page = {
           totalCount: res.result.total,

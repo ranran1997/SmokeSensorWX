@@ -22,7 +22,7 @@ import { WxGetUser } from "@/api/wx";
 import { BindUser, GetSMSValidate } from "@/api/user";
 import validator from "@/libs/validator";
 import { GetQueryString } from "@/libs/util";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "bind",
   data() {
@@ -37,7 +37,7 @@ export default {
         openid: "",
         headimage: "",
         cookie_value: "",
-        dutypath:""
+        dutypath: ""
       },
       errorMsg: {
         mobile: "",
@@ -77,10 +77,15 @@ export default {
       } else {
         return "发送验证码";
       }
-    }
+    },
+    ...mapState({
+      openid: state => state.user.openid,
+      headimage: state => state.user.headimage
+    })
   },
   created() {
-    this.getWxUserInfo();
+    this.bindForm.openid = this.openid;
+    this.bindForm.headimage = this.headimage;
     this.validator = validator(this.rules, this.bindForm);
   },
 
@@ -88,19 +93,6 @@ export default {
     ...mapMutations({
       setUserInfo: "setWxUserInfo" // 将 `this.add()` 映射为 `this.$store.commit('increment')`
     }),
-    async getWxUserInfo() {
-      const wx_code = GetQueryString("code");
-      let res = await WxGetUser({ code: wx_code });
-      if (res.code === -1 && res.result) {
-        this.bindForm.openid = res.result.openid;
-        this.bindForm.headimage = res.result.headimage;
-      } else if (res.code === -1 && res.msg) {
-        this.$router.replace("/auth");
-      } else if (res.code === 0) {
-        this.setUserInfo(res.result);
-        this.$router.replace("/user");
-      }
-    },
     async getValidateCode() {
       if (!this.sendMsgDisabled) {
         if (/^[1][0-9]{10}$/.test(this.bindForm.mobile)) {

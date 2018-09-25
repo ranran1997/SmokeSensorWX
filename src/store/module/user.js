@@ -15,14 +15,12 @@ export default {
     dutypath: ''
   },
   mutations: {
-    updateUserState(state) {
-      state.token = sessionStorage.getItem('token')
-      state.userName = sessionStorage.getItem('userName')
-      state.userId = sessionStorage.getItem('userId')
-      state.isVip = sessionStorage.getItem('isVip')
-    },
     setDutyPath(state, dutypath) {
       state.dutypath = dutypath;
+    },
+    setWxOpenId(state, result) {
+      state.openid = result.openid;
+      state.headimage = result.headimage;
     },
     setWxUserInfo(state, user_info) {
       state.username = user_info.username;

@@ -82,7 +82,6 @@ export default {
     },
     viewPic() {
       const dutypath = mediaURL + this.dutypath;
-      console.log(dutypath);
       wx.previewImage({
         current: "", // 当前显示图片的http链接
         urls: [dutypath] // 需要预览的图片http链接列表

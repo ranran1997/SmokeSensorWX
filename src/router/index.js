@@ -1,24 +1,19 @@
-// import { routers } from './router'
-//
-// // 路由配置
-// const RouterConfig = {
-//   // mode: 'history',
-//   routes: routers
-// }
-//
-// export const router = new VueRouter(RouterConfig)
-
-import { routers } from './router'
+import {
+  routers
+} from './router'
 import {
   GetQueryString
 } from "@/libs/util";
-// import Router from 'vue-router'
-// import {LoadingBar,Message} from 'iview'
+import Store from '@/store'
+import {
+  WxGetUser
+} from "@/api/wx";
 
 const router = new VueRouter({
   routes: routers
 })
 const AUTH_PAGE_NAME = '/auth'
+
 
 router.beforeEach((to, from, next) => {
   //  第一次进入项目
@@ -28,7 +23,28 @@ router.beforeEach((to, from, next) => {
     next(AUTH_PAGE_NAME);
     return false;
   }
-  next();
+  if (to.path != AUTH_PAGE_NAME && !Store.state.user.username) {
+    WxGetUser({
+      code: wx_code
+    }).then(res => {
+       if (res.code === -1 && res.result) {
+         Store.commit('setWxOpenId', res.result)
+          next();
+       } else if (res.code === -1 && res.msg) {
+         next('/auth');
+       } else if (res.code === 0) {
+          Store.commit('setWxUserInfo', res.result)
+         next({replace:true,name:'user'});
+       }
+    }).catch(function (error) {
+      // promise chain中出现异常的时候会被调用
+      console.error(error);
+    });
+  } else {
+    next();
+  }
+
+
 })
 
 router.afterEach(to => {
