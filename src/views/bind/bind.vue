@@ -100,7 +100,14 @@ export default {
             mobile: this.bindForm.mobile,
             purpose: this.bindForm.purpose
           });
-          this.countDown();
+          if (res.code === 0) {
+            this.bindForm.username = res.result.name;
+            this.bindForm.addr = res.result.addr;
+            this.bindForm.shopname = res.result.shopname;
+            this.countDown();
+          } else {
+            this.$toast("服务器超时，请稍后再试");
+          }
         } else {
           this.$toast("请输入正确的手机号");
         }
@@ -124,6 +131,7 @@ export default {
           let res = await BindUser(this.bindForm);
           if (res.code === 0) {
             this.bindForm.cookie_value = res.result.cookie_value;
+            this.bindForm.dutypath = res.result.dutypath;
             this.setUserInfo(this.bindForm);
             this.$router.replace("/user");
           } else {
@@ -140,7 +148,9 @@ export default {
     resetField(attrs) {
       attrs = !attrs
         ? Object.keys(this.errorMsg)
-        : Array.isArray(attrs) ? attrs : [attrs];
+        : Array.isArray(attrs)
+          ? attrs
+          : [attrs];
       attrs.forEach(attr => {
         this.errorMsg[attr] = "";
       });
